@@ -588,9 +588,19 @@ button {
   border: 1px solid var(--k-glass-border);
   border-radius: 14px;
   padding: 13px 14px;
-  font-size: 14px;
+  /* 16px minimum prevents iOS Safari from auto-zooming the page on focus */
+  font-size: 16px;
   color: var(--k-text);
   outline: none;
+}
+
+/* Past the mobile breakpoint, iOS zoom-on-focus no longer applies, so the
+   form fields can drop back to the original, more compact desktop size. */
+@media (min-width: 640px) {
+  .field-input,
+  .field select {
+    font-size: 14px;
+  }
 }
 
 .field-input::placeholder {
