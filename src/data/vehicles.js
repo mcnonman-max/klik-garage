@@ -1,0 +1,75 @@
+export const initialVehicles = [
+  {
+    id: 'v1',
+    name: 'Škoda Octavia',
+    plate: '1AB 2345',
+    insurance: { date: '2027-03-15', company: 'Kooperativa' },
+    parking: { date: null },
+    vignettes: [{ id: 'vg1', date: '2027-01-31', country: 'Česko' }],
+  },
+  {
+    id: 'v2',
+    name: 'Volkswagen Golf',
+    plate: '2CD 6789',
+    insurance: { date: '2026-07-08', company: 'Allianz' },
+    parking: { date: '2026-06-20' },
+    vignettes: [{ id: 'vg2', date: '2027-01-31', country: 'Česko' }],
+  },
+  {
+    id: 'v3',
+    name: 'Toyota Yaris',
+    plate: '3EF 1122',
+    insurance: { date: '2026-05-01', company: 'Generali' },
+    parking: { date: '2026-08-17' },
+    vignettes: [{ id: 'vg3', date: '2026-07-15', country: 'Rakousko' }],
+  },
+]
+
+export const NATIONALITIES = [
+  'Bulharsko',
+  'Česko',
+  'Lotyšsko',
+  'Maďarsko',
+  'Moldavsko',
+  'Rakousko',
+  'Rumunsko',
+  'Slovensko',
+  'Slovinsko',
+  'Švýcarsko',
+]
+
+export const CAR_BRANDS = [
+  'Volkswagen',
+  'Škoda',
+  'Renault',
+  'BMW',
+  'Mercedes-Benz',
+  'Audi',
+  'Toyota',
+  'Ford',
+  'Peugeot',
+  'Opel',
+  'Citroën',
+  'Kia',
+  'Hyundai',
+  'Fiat',
+  'Seat',
+  'Volvo',
+  'Dacia',
+  'Nissan',
+  'Mini',
+  'Suzuki',
+]
+
+export const INSURERS = [
+  'Allianz',
+  'ČSOB Pojišťovna',
+  'ČPP',
+  'Generali',
+  'Kooperativa',
+  'Slavia pojišťovna',
+  'UNIQA',
+  'Direct pojišťovna',
+  'Simplea',
+  'Jiná',
+]

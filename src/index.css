@@ -1,0 +1,899 @@
+:root {
+  --k-primary: #ff2d96;
+  --k-primary-dim: #e5087c;
+  --k-pink-soft: #f5a8ce;
+  --k-pink-mid: #f0529e;
+  --k-pink-deep: #b4005c;
+  --k-pink-deep-text: #ff6fb8;
+  --k-text: #f2f2f2;
+  --k-muted: #9a9a9e;
+  --k-glass-bg: rgba(255, 255, 255, 0.05);
+  --k-glass-bg-strong: rgba(255, 255, 255, 0.06);
+  --k-glass-border: rgba(255, 255, 255, 0.1);
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #0b0b0d;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+  color: var(--k-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select {
+  font-family: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* ---------- App shell: fluid full-width on mobile/tablet, ---------- */
+/* ---------- capped to a centered column past the desktop breakpoint ---------- */
+
+.app-shell {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(
+      120% 60% at 20% 0%,
+      rgba(255, 45, 150, 0.22) 0%,
+      rgba(255, 45, 150, 0) 55%
+    ),
+    radial-gradient(
+      110% 50% at 90% 15%,
+      rgba(120, 120, 130, 0.3) 0%,
+      rgba(120, 120, 130, 0) 55%
+    ),
+    radial-gradient(
+      120% 60% at 10% 100%,
+      rgba(180, 0, 92, 0.2) 0%,
+      rgba(180, 0, 92, 0) 50%
+    ),
+    linear-gradient(180deg, #17171a 0%, #0e0e10 100%);
+  display: flex;
+  flex-direction: column;
+}
+
+/* tablet/desktop breakpoint: cap to a centered mobile-width column instead of stretching full-bleed */
+@media (min-width: 640px) {
+  .app-shell {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}
+
+.glass {
+  background: var(--k-glass-bg);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border: 1px solid var(--k-glass-border);
+  border-radius: 22px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.icon-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--k-glass-bg-strong);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--k-glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--k-text);
+  flex-shrink: 0;
+}
+
+/* ---------- Top bar (sub-pages) ---------- */
+
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px 6px;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--k-text);
+}
+
+.icon-btn {
+  background: var(--k-glass-bg-strong);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--k-glass-border);
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--k-text);
+  flex-shrink: 0;
+}
+
+.icon-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* ---------- Homepage header ---------- */
+
+.home-header {
+  padding: 10px 18px 6px;
+}
+
+.home-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.home-greeting {
+  padding: 8px 14px;
+}
+
+.home-greeting p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--k-muted);
+}
+
+.home-greeting h1 {
+  margin: 1px 0 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--k-text);
+}
+
+.home-header-icons {
+  display: flex;
+  gap: 8px;
+}
+
+.notif-dot {
+  position: absolute;
+  top: 7px;
+  right: 8px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--k-primary);
+  box-shadow: 0 0 8px var(--k-primary);
+}
+
+/* ---------- Alert banner ---------- */
+
+.alert-banner {
+  margin: 10px 18px 0;
+  background: rgba(255, 45, 150, 0.14);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 45, 150, 0.3);
+  border-radius: 16px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.alert-banner p {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--k-text);
+}
+
+.alert-banner svg {
+  color: var(--k-primary);
+  flex-shrink: 0;
+}
+
+/* ---------- Count + sort row ---------- */
+
+.list-toolbar {
+  padding: 14px 18px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.list-toolbar p {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--k-muted);
+  font-weight: 500;
+}
+
+.sort-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 12.5px;
+  color: var(--k-primary);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sort-btn svg {
+  transition: transform 0.15s ease;
+}
+
+.sort-btn.desc svg {
+  transform: rotate(180deg);
+}
+
+/* ---------- Vehicle list ---------- */
+
+.vehicle-list {
+  padding: 10px 18px calc(88px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+}
+
+.vehicle-card {
+  padding: 14px;
+}
+
+.vehicle-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.vehicle-card-id {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.vehicle-icon-sq {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 45, 150, 0.35),
+    rgba(255, 45, 150, 0.1)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 45, 150, 0.3);
+  color: var(--k-primary);
+  flex-shrink: 0;
+}
+
+.vehicle-brand-logo {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.vehicle-name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.vehicle-name {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--k-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  flex-shrink: 1;
+}
+
+.stk-badge {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 6px;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+.stk-badge.stk-ok {
+  background: rgba(52, 199, 89, 0.16);
+  border: 1px solid rgba(52, 199, 89, 0.45);
+  color: #34c759;
+}
+
+.stk-badge.stk-warning {
+  background: rgba(255, 204, 0, 0.16);
+  border: 1px solid rgba(255, 204, 0, 0.45);
+  color: #ffcc00;
+}
+
+.stk-badge.stk-critical {
+  background: rgba(255, 59, 48, 0.16);
+  border: 1px solid rgba(255, 59, 48, 0.45);
+  color: #ff453a;
+}
+
+.plate-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 4px;
+  border-radius: 5px;
+  overflow: hidden;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.plate-badge span:first-child {
+  background: #1a3fa6;
+  color: #fff;
+  padding: 1px 4px;
+}
+
+.plate-badge span:last-child {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--k-text);
+  padding: 1px 6px;
+  letter-spacing: 0.5px;
+}
+
+.options-btn {
+  background: none;
+  border: none;
+  padding: 4px;
+  color: var(--k-muted);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.chip-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.status-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 9px 4px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  background: none;
+  text-align: center;
+}
+
+.status-chip span.chip-label {
+  font-size: 10.5px;
+  color: var(--k-text);
+  font-weight: 600;
+}
+
+.status-chip span.chip-status {
+  font-size: 9.5px;
+}
+
+.status-chip.status-unset {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+}
+.status-chip.status-unset svg,
+.status-chip.status-unset span.chip-status {
+  color: var(--k-muted);
+}
+
+.status-chip.status-ok {
+  border-color: rgba(245, 168, 206, 0.35);
+  background: rgba(245, 168, 206, 0.1);
+}
+.status-chip.status-ok svg,
+.status-chip.status-ok span.chip-status {
+  color: var(--k-pink-soft);
+}
+
+.status-chip.status-warning {
+  border-color: rgba(240, 82, 158, 0.4);
+  background: rgba(240, 82, 158, 0.14);
+}
+.status-chip.status-warning svg,
+.status-chip.status-warning span.chip-status {
+  color: var(--k-pink-mid);
+}
+
+.status-chip.status-critical {
+  border-color: rgba(180, 0, 92, 0.5);
+  background: rgba(180, 0, 92, 0.22);
+}
+.status-chip.status-critical svg,
+.status-chip.status-critical span.chip-status {
+  color: var(--k-pink-deep-text);
+}
+
+/* ---------- Add vehicle button ---------- */
+
+.add-vehicle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1.5px dashed rgba(255, 45, 150, 0.45);
+  border-radius: 22px;
+  padding: 14px;
+  color: var(--k-primary);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+/* ---------- Bottom nav ---------- */
+/* fixed to the viewport bottom, width-matched to the app-shell column, so it */
+/* stays visible while the page content scrolls underneath it */
+
+.bottom-nav {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 100%;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: var(--k-glass-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid var(--k-glass-border);
+  padding: 10px 0 max(18px, env(safe-area-inset-bottom));
+}
+
+@media (min-width: 640px) {
+  .bottom-nav {
+    max-width: 480px;
+  }
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  color: var(--k-muted);
+  background: none;
+  border: none;
+  font-size: 9.5px;
+}
+
+.nav-item.active {
+  color: var(--k-primary);
+  gap: 3px;
+  font-weight: 700;
+}
+
+.nav-item.active .nav-icon-pill {
+  background: rgba(255, 45, 150, 0.18);
+  border-radius: 10px;
+  padding: 3px 10px;
+  display: flex;
+}
+
+/* ---------- Generic menu list (insurance hub, add-vehicle choice, ...) ---------- */
+
+.menu-list {
+  padding: 10px 18px calc(88px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.menu-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  width: 100%;
+  text-align: left;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.menu-row .item-label {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--k-text);
+  flex: 1;
+}
+
+.menu-row .chevron {
+  color: var(--k-muted);
+  flex-shrink: 0;
+}
+
+/* ---------- Forms ---------- */
+
+.form-page {
+  padding: 0 18px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  flex: 1;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  font-size: 13px;
+  color: var(--k-muted);
+  font-weight: 500;
+}
+
+.field-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.field-input,
+.field select {
+  width: 100%;
+  background: var(--k-glass-bg-strong);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--k-glass-border);
+  border-radius: 14px;
+  padding: 13px 14px;
+  font-size: 14px;
+  color: var(--k-text);
+  outline: none;
+}
+
+.field-input::placeholder {
+  color: var(--k-muted);
+}
+
+.field-input:focus,
+.field select:focus {
+  border-color: rgba(255, 45, 150, 0.5);
+}
+
+.field-input.has-icon {
+  padding-right: 42px;
+}
+
+.field-icon {
+  position: absolute;
+  right: 14px;
+  color: var(--k-primary);
+  pointer-events: none;
+  display: flex;
+}
+
+.field select {
+  appearance: none;
+  padding-right: 38px;
+}
+
+.field-select-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.field-select-wrap .field-icon {
+  color: var(--k-muted);
+}
+
+/* ---------- Vignette rows (one per country) ---------- */
+
+.vignette-row {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.vignette-row-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.vignette-row-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--k-muted);
+}
+
+.row-remove-btn {
+  background: none;
+  border: none;
+  padding: 4px;
+  color: var(--k-muted);
+  display: flex;
+  align-items: center;
+}
+
+/* date input calendar-picker icon needs to remain clickable & cover the field */
+input[type='date']::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.primary-btn {
+  background: var(--k-primary);
+  border: none;
+  border-radius: 14px;
+  padding: 15px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #1a0510;
+  margin-top: auto;
+}
+
+.primary-btn:active {
+  background: var(--k-primary-dim);
+}
+
+.primary-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.danger-btn {
+  background: #e0334f;
+  border: none;
+  border-radius: 14px;
+  padding: 15px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.danger-btn:active {
+  background: #b8283f;
+}
+
+.hint-text {
+  margin: -8px 0 0;
+  font-size: 12px;
+  color: var(--k-muted);
+}
+
+/* ---------- Two-option switcher (e.g. tires) ---------- */
+
+.switcher {
+  display: flex;
+  gap: 8px;
+}
+
+.switcher-option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 12px 8px;
+  border-radius: 14px;
+  border: 1px solid var(--k-glass-border);
+  background: var(--k-glass-bg-strong);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.switcher-option-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--k-text);
+}
+
+.switcher-option-hint {
+  font-size: 10.5px;
+  color: var(--k-muted);
+}
+
+.switcher-option.active {
+  border-color: rgba(255, 45, 150, 0.5);
+  background: rgba(255, 45, 150, 0.14);
+}
+
+.switcher-option.active .switcher-option-title {
+  color: var(--k-primary);
+}
+
+/* ---------- Splash screen ---------- */
+
+.splash-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.splash-logo {
+  width: 200px;
+  max-width: 70%;
+  height: auto;
+  opacity: 0;
+  animation: splash-logo-fade-in 2.2s ease-out forwards;
+}
+
+@keyframes splash-logo-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ---------- Seasonal tire reminder row ---------- */
+
+.tire-alert {
+  margin-top: 12px;
+  border-radius: 14px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.tire-alert-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tire-alert-text {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.tire-alert.tire-ok {
+  background: rgba(52, 199, 89, 0.12);
+  border: 1px solid rgba(52, 199, 89, 0.35);
+}
+
+.tire-alert.tire-ok svg {
+  color: #34c759;
+  flex-shrink: 0;
+}
+
+.tire-alert.tire-ok .tire-alert-text {
+  color: #34c759;
+}
+
+.tire-alert.tire-warning {
+  background: rgba(255, 204, 0, 0.12);
+  border: 1px solid rgba(255, 204, 0, 0.4);
+}
+
+.tire-alert.tire-warning svg {
+  color: #ffcc00;
+  flex-shrink: 0;
+}
+
+.tire-alert.tire-warning .tire-alert-text {
+  color: #ffcc00;
+}
+
+.tire-confirm-btn {
+  background: #ffcc00;
+  color: #1a1400;
+  border: none;
+  border-radius: 10px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.tire-confirm-btn:active {
+  background: #e0b400;
+}
+
+/* ---------- Emoji picker (vehicle name field) ---------- */
+
+.emoji-picker {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.emoji-picker-toggle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--k-glass-border);
+  background: var(--k-glass-bg);
+  font-size: 15px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emoji-picker-panel {
+  /* position/top/right are set inline (fixed, computed from the toggle button's */
+  /* rect) since this panel is portaled to <body> to escape any backdrop-filter */
+  /* ancestor that would otherwise trap it in a lower stacking context */
+  z-index: 999;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+  width: 220px;
+  padding: 10px;
+  border-radius: 14px;
+  background: #1c1c1f;
+  border: 1px solid var(--k-glass-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.emoji-picker-option {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  background: none;
+  border: none;
+  border-radius: 8px;
+}
+
+.emoji-picker-option:active {
+  background: rgba(255, 255, 255, 0.1);
+}
