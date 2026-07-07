@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { IconAlertTriangle, IconBell, IconChevronDown, IconPlus, IconUser } from '@tabler/icons-react'
+import { IconAlertTriangle, IconBell, IconChevronDown, IconPlus } from '@tabler/icons-react'
 import { useVehicles } from '../state/VehiclesContext'
 import { getStatus } from '../utils/dateStatus'
 import { vehicleAttentionText, vehicleCountText } from '../utils/plural'
@@ -20,7 +20,7 @@ function needsAttention(vehicle) {
   return basicFieldsNeedAttention || vignettesNeedAttention
 }
 
-export default function Homepage() {
+export default function Homepage({ userName }) {
   const navigate = useNavigate()
   const { vehicles } = useVehicles()
   const [sortDesc, setSortDesc] = useState(false)
@@ -40,16 +40,13 @@ export default function Homepage() {
       <div className="home-header">
         <div className="home-header-row">
           <div className="glass home-greeting" style={{ borderRadius: 18 }}>
-            <p>Dobrý večer, Jano</p>
+            <p>Vítej, {userName}</p>
             <h1>Vaše garáž</h1>
           </div>
           <div className="home-header-icons">
             <button className="icon-circle" type="button" style={{ position: 'relative' }} aria-label="Oznámení">
               <IconBell size={17} stroke={1.8} />
               <span className="notif-dot" />
-            </button>
-            <button className="icon-circle" type="button" aria-label="Profil">
-              <IconUser size={17} stroke={1.8} />
             </button>
           </div>
         </div>

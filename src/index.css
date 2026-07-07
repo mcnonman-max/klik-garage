@@ -561,6 +561,11 @@ button {
   flex: 1;
 }
 
+/* leaves room for the fixed bottom nav on tab pages (Profil, ...) that render it */
+.form-page.with-bottom-nav {
+  padding-bottom: calc(88px + env(safe-area-inset-bottom));
+}
+
 .field {
   display: flex;
   flex-direction: column;
@@ -906,4 +911,27 @@ input[type='date']::-webkit-calendar-picker-indicator {
 
 .emoji-picker-option:active {
   background: rgba(255, 255, 255, 0.1);
+}
+
+/* ---------- Welcome / name onboarding page ---------- */
+
+.welcome-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+  padding: 0 18px 40px;
+}
+
+.welcome-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--k-text);
+  text-align: center;
+}
+
+.welcome-page .primary-btn {
+  margin-top: 8px;
 }

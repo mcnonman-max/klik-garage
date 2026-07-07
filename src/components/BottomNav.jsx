@@ -6,6 +6,7 @@ export default function BottomNav() {
   const navigate = useNavigate()
   const isGarage = pathname === '/'
   const isInsurance = pathname.startsWith('/pojisteni')
+  const isProfile = pathname.startsWith('/profil')
 
   return (
     <nav className="bottom-nav">
@@ -25,8 +26,14 @@ export default function BottomNav() {
         </span>
         <span>Pojištění</span>
       </button>
-      <button className="nav-item" type="button">
-        <IconUser size={19} stroke={1.8} />
+      <button
+        className={`nav-item ${isProfile ? 'active' : ''}`}
+        type="button"
+        onClick={() => navigate('/profil')}
+      >
+        <span className="nav-icon-pill">
+          <IconUser size={19} stroke={1.8} />
+        </span>
         <span>Profil</span>
       </button>
     </nav>
