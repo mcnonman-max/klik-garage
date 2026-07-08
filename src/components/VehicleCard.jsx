@@ -1,14 +1,14 @@
 import { useNavigate } from 'react-router-dom'
 import {
-  IconAlertTriangle,
   IconCar,
-  IconCircleCheck,
   IconDotsVertical,
+  IconMountain,
   IconShieldCheck,
   IconShieldExclamation,
   IconShieldX,
   IconParking,
   IconRoad,
+  IconSun,
 } from '@tabler/icons-react'
 import PlateBadge from './PlateBadge'
 import StatusChip from './StatusChip'
@@ -33,13 +33,10 @@ const STK_LABELS = {
   critical: 'STK neplatná',
 }
 
-const TIRE_LABELS = {
-  ok: { winter: 'Zimní pneumatiky', summer: 'Letní pneumatiky' },
-  warning: {
-    winter: 'Blíží se přezutí na zimní pneumatiky',
-    summer: 'Blíží se přezutí na letní pneumatiky',
-  },
-}
+// Icon always matches the target/current season itself (never the state),
+// per spec: "ikona vždy odpovídá cílové sezóně, ne sezóně ze které se odchází".
+const TIRE_ICONS = { summer: IconSun, winter: IconMountain }
+const TIRE_OK_TEXT = { winter: 'Zimní pneumatiky', summer: 'Letní pneumatiky' }
 
 export default function VehicleCard({ vehicle }) {
   const navigate = useNavigate()
@@ -59,6 +56,12 @@ export default function VehicleCard({ vehicle }) {
   const stkStatus = stkDate ? getStatus(stkDate) : null
 
   const tireStatus = vehicle.tires === 'seasonal' ? getTireSeasonStatus(vehicle.tireSwapConfirmedFor) : null
+  const TireIcon = tireStatus ? TIRE_ICONS[tireStatus.tireType] : null
+  const tireText = tireStatus
+    ? tireStatus.state === 'warning'
+      ? 'Blíží se přezutí'
+      : TIRE_OK_TEXT[tireStatus.tireType]
+    : null
 
   return (
     <div className="glass vehicle-card">
@@ -114,12 +117,8 @@ export default function VehicleCard({ vehicle }) {
       {tireStatus && (
         <div className={`tire-alert tire-${tireStatus.state}`}>
           <div className="tire-alert-row">
-            {tireStatus.state === 'warning' ? (
-              <IconAlertTriangle size={16} stroke={2} />
-            ) : (
-              <IconCircleCheck size={16} stroke={2} />
-            )}
-            <span className="tire-alert-text">{TIRE_LABELS[tireStatus.state][tireStatus.tireType]}</span>
+            <TireIcon size={16} stroke={2} />
+            <span className="tire-alert-text">{tireText}</span>
           </div>
           {tireStatus.state === 'warning' && (
             <button
